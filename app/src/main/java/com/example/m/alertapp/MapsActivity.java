@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -28,6 +29,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     Geocoder gcd;
     String ciudad;
+
+    String placa = "apk234";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +93,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         if (addresses.size() > 0) {
+
             ciudad = addresses.get(0).getLocality();
-            Toast.makeText(this, ciudad, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ciudad +","+getDay(), Toast.LENGTH_SHORT).show();
+
+
         }
         else {
             // do your stuff
         }
+    }
+
+
+    public String getDay(){
+        String Valor_dia = null;
+        int diaSemana = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        if (diaSemana == 1) {
+            Valor_dia = "Domingo";
+        } else if (diaSemana == 2) {
+            Valor_dia = "Lunes";
+        } else if (diaSemana == 3) {
+            Valor_dia = "Martes";
+        } else if (diaSemana == 4) {
+            Valor_dia = "Miercoles";
+        } else if (diaSemana == 5) {
+            Valor_dia = "Jueves";
+        } else if (diaSemana == 6) {
+            Valor_dia = "Viernes";
+        } else if (diaSemana == 7) {
+            Valor_dia = "Sabado";
+        }
+        return Valor_dia;
+        
     }
 
     @Override
